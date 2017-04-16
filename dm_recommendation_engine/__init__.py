@@ -11,7 +11,6 @@ def log(msg):
 
 
 class ContentBasedRecommendationEngine:
-    SIMKEY = 'p:smlr:%s'
 
     def __init__(self):
         self.data = pd.DataFrame()
