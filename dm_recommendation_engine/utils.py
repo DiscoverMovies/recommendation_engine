@@ -22,3 +22,11 @@ def partition(data, min_num):
             final_set.append(i)
     return final_set
 
+
+def min_max_normalize(data, min, max):
+    r = []
+    for i in data:
+        value = i - min
+        value = value / (max - min)
+        r.append(value)
+    return r

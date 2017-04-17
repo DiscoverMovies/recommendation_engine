@@ -1,4 +1,4 @@
-from movie_recomendation_engine import ContentBasedRecommendationEngine
+from dm_recommendation_engine import ContentBasedRecommendationEngine
 
 import pandas as pd
 
