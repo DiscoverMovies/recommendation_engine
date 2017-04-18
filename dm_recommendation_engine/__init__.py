@@ -7,7 +7,7 @@ import pandas as pd
 
 from dm_recommendation_engine.utils import min_max_normalize
 
-DEBUG = False
+DEBUG = True
 
 
 def log(msg):
@@ -126,14 +126,13 @@ class UserRecommendationGenerator:
         predicted_rating = [0 for i in feature_list]
         for k in range(len(feature_list)):
             for i in range(len(feature_list[k])):
-                predicted_rating[k]+= feature_list[k][i]* self.feature_weights[k][i]
+                predicted_rating[k] += feature_list[k][i] * self.feature_weights[k][i]
             predicted_rating[k] = min_max_normalize(
-                [predicted_rating[k]],self.min_predicted_rating[k],self.max_predicted_rating[k]
+                [predicted_rating[k]], self.min_predicted_rating[k], self.max_predicted_rating[k]
             )[0]
-            r += predicted_rating[k] * exp(self.mean_absolute_error[k])
+            r += predicted_rating[k] * exp(-self.mean_absolute_error[k])
         r /= len(self.feature_weights)
         return r
-
 
     def _calculate_mean_absolute_error(self, data, normalized_predicted_rating, normalized_rating):
         self.mean_absolute_error = [0 for i in data]
@@ -156,7 +155,7 @@ class UserRecommendationGenerator:
         for i in range(len(predicted_rating)):
             for j in range(len(predicted_rating[i])):
                 if predicted_rating[i][j] > self.max_predicted_rating[i]:
-                    self.max_predicted_rating[j] = predicted_rating[i][j]
+                    self.max_predicted_rating[i] = predicted_rating[i][j]
                 if predicted_rating[i][j] < self.min_predicted_rating[i]:
                     self.min_predicted_rating[i] = predicted_rating[i][j]
 
@@ -165,5 +164,5 @@ class UserRecommendationGenerator:
         for k in range(len(data)):
             for i in range(len(data[k])):
                 for j in range(len(data[k][i])):
-                    predicted_rating[k][i] = self.feature_weights[k][j] * data[k][i][j]
+                    predicted_rating[k][i] += self.feature_weights[k][j] * data[k][i][j]
         return predicted_rating

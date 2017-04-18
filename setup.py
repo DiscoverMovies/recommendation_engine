@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='dm_recommendation_engine',
-    version='0.1.2',
+    version='0.1.3',
     packages=['dm_recommendation_engine'],
     url='https://github.com/DiscoverMovies/recommendation_engine',
     license="MIT License",

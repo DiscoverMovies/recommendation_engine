@@ -13,8 +13,8 @@ feature_matrix_b = [
     [0,0,1,1,0,0],
     [1,0,1,1,1,1]
 ]
-rating = [2,4,1,5]
+rating = [4,5,5,5]
 r = UserRecommendationGenerator()
 r.train(rating,feature_matrix_a,feature_matrix_b)
 
-print("Result:", r.predict([0,0,0,0,0],[0,0,0,0,0,0]))
+print("Result:", r.predict([1,1,1,1,1],[1,1,1,1,1,1]))
